@@ -1131,7 +1131,7 @@ class RealNVP(object):
 
         step = tf.get_variable(
             "global_step", [], tf.int64,
-            tf.zeros_initializer(),
+            tf.zeros_initializer,
             trainable=False)
         self.step = step
         grads_and_vars = optimizer.compute_gradients(
