@@ -1507,7 +1507,7 @@ def train_model(hps, logdir):
                     summary_writer.add_summary(summary_str, global_step_val)
 
                 # Save the model checkpoint periodically.
-                if local_step % 1000 == 0 or (local_step + 1) == FLAGS.train_steps:
+                if local_step % 200 == 0 or (local_step + 1) == FLAGS.train_steps:
                     checkpoint_path = os.path.join(logdir, 'model.ckpt')
                     saver.save(
                         sess,
