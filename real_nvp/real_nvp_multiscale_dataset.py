@@ -1456,6 +1456,7 @@ class RealNVP(object):
 def train_model(hps, logdir):
     """Training."""
     with tf.Graph().as_default():
+        tf.set_random_seed(1)
         with tf.device(tf.train.replica_device_setter(0)):
             with tf.variable_scope("model"):
                 model = RealNVP(hps)
