@@ -1462,7 +1462,7 @@ def train_model(hps, logdir):
             # implementations.
             sess = tf.Session(config=tf.ConfigProto(
                 allow_soft_placement=True,
-                log_device_placement=True))
+                log_device_placement=False))
             sess.run(init)
 
             ckpt_state = tf.train.get_checkpoint_state(logdir)
@@ -1533,7 +1533,7 @@ def evaluate(hps, logdir, traindir, subset="valid", return_val=False):
             saver = tf.train.Saver()
             sess = tf.Session(config=tf.ConfigProto(
                 allow_soft_placement=True,
-                log_device_placement=True))
+                log_device_placement=False))
             tf.train.start_queue_runners(sess)
 
             previous_global_step = 0  # don"t run eval for step = 0
@@ -1585,7 +1585,7 @@ def sample_from_model(hps, logdir, traindir):
             saver = tf.train.Saver()
             sess = tf.Session(config=tf.ConfigProto(
                 allow_soft_placement=True,
-                log_device_placement=True))
+                log_device_placement=False))
             coord = tf.train.Coordinator()
             threads = tf.train.start_queue_runners(sess=sess, coord=coord)
 
