@@ -1535,7 +1535,7 @@ def evaluate(hps, logdir, traindir, subset="valid", return_val=False):
     """Evaluation."""
     hps.batch_size = 100
     with tf.Graph().as_default():
-        with tf.device("/cpu:0"):
+        with tf.device("/gpu:0"):
             with tf.variable_scope("model") as var_scope:
                 eval_model = RealNVP(hps)
                 summary_writer = tf.summary.FileWriter(logdir)
