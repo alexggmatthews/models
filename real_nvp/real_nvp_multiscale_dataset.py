@@ -1088,11 +1088,11 @@ class RealNVP(object):
             input_=logit_x_in, hps=hps, n_scale=hps.n_scale,
             use_batch_norm=hps.use_batch_norm, weight_norm=True,
             train=True)
-        if FLAGS.mode != "train":
-              z_out, log_diff = encoder(
-                  input_=logit_x_in, hps=hps, n_scale=hps.n_scale,
-                  use_batch_norm=hps.use_batch_norm, weight_norm=True,
-                  train=False)
+        #if FLAGS.mode != "train":
+        #      z_out, log_diff = encoder(
+        #          input_=logit_x_in, hps=hps, n_scale=hps.n_scale,
+        #          use_batch_norm=hps.use_batch_norm, weight_norm=True,
+        #          train=False)
         final_shape = [image_size, image_size, 3]
         prior_ll = standard_normal_ll(z_out)
         prior_ll = tf.reduce_sum(prior_ll, [1, 2, 3])
@@ -1587,7 +1587,7 @@ def sample_from_model(hps, logdir, traindir):
     """Sampling."""
     hps.batch_size = 100
     with tf.Graph().as_default():
-        with tf.device("/cpu:0"):
+        with tf.device("/gpu:0"):
             with tf.variable_scope("model") as var_scope:
                 eval_model = RealNVP(hps, sampling=True)
                 summary_writer = tf.summary.FileWriter(logdir)
